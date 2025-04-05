@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="index.js"></script>
+    <script type="module" src="firebase.js"></script>
+    <link rel="stylesheet" href="index.css" />
+    <title>NoteTracker</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Take a Note</h1>
+      <form id="note-form">
+        <label for="title">Title</label>
+        <input
+          class="form-field form-text"
+          type="text"
+          id="title"
+          placeholder="Title..."
+          required
+        />
+        <label for="note">Note</label>
+        <textarea
+          class="form-field form-text"
+          id="note"
+          placeholder="Note..."
+          required
+          rows="1"
+        ></textarea>
+        <label for="tags">Tags</label>
+        <div class="tag-box">
+          <select name="tags" class="form-field" id="tags-container" required>
+            <option value="none">None</option>
+            <option value="school">School</option>
+            <option value="programming">Programming</option>
+          </select>
+          <button type="button" id="new-tag-btn">New Tag +</button>
+        </div>
+        <button type="submit" id="submit-btn">Submit</button>
+      </form>
+    </main>
+  </body>
+</html>
