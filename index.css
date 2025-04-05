@@ -54,10 +54,14 @@ body {
   color: var(--clr-neutral-100);
   font-family: "Times New Roman", Times, serif;
 }
-
 main {
   width: 100%;
   height: 100vh;
+}
+
+.note-inbox {
+  width: 100%;
+  height: 100%;
 
   display: grid;
   gap: 1rem;
@@ -68,14 +72,14 @@ main {
   display: grid;
   gap: 1rem;
   width: 100%;
-  max-width: 500px;
+  margin-inline: auto;
+  min-width: 300px;
 }
 label {
   font-weight: bold;
 }
 
 .form-field {
-  min-width: 200px;
   padding: 0.5rem;
   color: inherit;
   border-radius: 0.5rem;
@@ -107,7 +111,6 @@ label {
 form textarea {
   min-height: 50px;
   resize: none;
-  width: 500px;
 }
 
 button {
