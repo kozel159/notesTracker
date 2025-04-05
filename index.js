@@ -10,3 +10,14 @@ window.addEventListener("DOMContentLoaded", () => {
   const textarea = document.getElementById("note");
   textarea.addEventListener("input", () => autoResize(textarea));
 });
+
+document.querySelectorAll(".drop-btn").forEach((button) => {
+  button.addEventListener("click", () => {
+    const ul = this.closest(".note-container").querySelector(".note-list");
+
+    ul.style.display =
+      ul.style.display === "none" || ul.style.display === "" ? "block" : "none";
+
+    this.textContent = ul.style.display === "none" ? "▼" : "►";
+  });
+});

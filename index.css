@@ -53,19 +53,37 @@ body {
   background-color: var(--clr-neutral-200);
   color: var(--clr-neutral-100);
   font-family: "Times New Roman", Times, serif;
-}
-main {
   width: 100%;
+  max-width: 1500px;
+  margin-inline: auto;
   height: 100vh;
+
+  display: grid;
+  gap: 2rem;
 }
+
+@media (min-width: 800px) {
+  body {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Inbox */
 
 .note-inbox {
   width: 100%;
   height: 100%;
 
   display: grid;
-  gap: 1rem;
   place-content: center;
+}
+
+.form-box {
+  display: grid;
+  gap: 1rem;
+  background-color: var(--clr-neutral-300);
+  padding: 2rem;
+  border-radius: 0.5rem;
 }
 
 #note-form {
@@ -84,8 +102,8 @@ label {
   color: inherit;
   border-radius: 0.5rem;
   border: none;
-  background-color: var(--clr-neutral-200);
-  outline: 3px solid var(--clr-neutral-300);
+  background-color: var(--clr-neutral-300);
+  outline: 3px solid var(--clr-neutral-100);
 }
 .form-text:not(:placeholder-shown):valid {
   outline-color: var(--clr-succsess);
@@ -125,4 +143,38 @@ button {
 button:hover {
   background-color: var(--clr-neutral-200);
   color: var(--clr-primary-100);
+}
+
+/* Storage */
+
+.note-storage {
+  width: 100%;
+  max-width: 1500px;
+  padding-inline: 1rem;
+  align-self: center;
+
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(275px, 100%), 1fr));
+  overflow-x: hidden;
+}
+
+.note-container {
+  width: 100%;
+  margin-inline: auto;
+  height: fit-content;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: var(--clr-neutral-300);
+
+  display: grid;
+  gap: 1rem;
+}
+.note-container h1 {
+  line-height: 1;
+}
+
+.note-list {
+  list-style: none;
+  display: none;
 }
