@@ -57,6 +57,7 @@ body {
   max-width: 1500px;
   margin-inline: auto;
   height: 100vh;
+  padding: 1rem;
 
   display: grid;
   gap: 2rem;
@@ -143,8 +144,8 @@ button:hover {
 
 .note-storage {
   width: 100%;
+  height: 100%;
   max-width: 1500px;
-  padding-inline: 1rem;
   align-self: center;
 
   display: grid;
