@@ -15,14 +15,26 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const referenceInDB = ref(database, "notes");
 
-const titleInputField = document.getElementById("title");
-const submitBtn = document.getElementById("submit-btn");
+3;
+document.addEventListener("DOMContentLoaded", function () {
+  document
+    .getElementById("note-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
 
-onValue(referenceInDB, (snapshot) => {
-  console.log(snapshot.val());
-});
+      const noteData = {
+        title: document.getElementById("title").value,
+        note: document.getElementById("note").value,
+        tag: document.getElementById("tags-container").value,
+      };
 
-submitBtn.addEventListener("click", function () {
-  push(referenceInDB, titleInputField.value);
-  titleInputField.value = "";
+      push(referenceInDB, noteData)
+        .then(() => {
+          console.log("Data saved successfully.");
+          document.getElementById("note-form").reset();
+        })
+        .catch((error) => {
+          console.error("Error saving data:", error);
+        });
+    });
 });
