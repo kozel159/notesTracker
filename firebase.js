@@ -15,7 +15,6 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const referenceInDB = ref(database, "notes");
 
-3;
 document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("note-form")
@@ -37,4 +36,53 @@ document.addEventListener("DOMContentLoaded", function () {
           console.error("Error saving data:", error);
         });
     });
+
+  onValue(referenceInDB, (snapshot) => {
+    const snapshotDoesExist = snapshot.exists();
+    if (snapshotDoesExist) {
+      const snapshotValues = snapshot.val();
+      const notes = Object.values(snapshotValues);
+
+      notes.sort((a, b) => a.tag.localeCompare(b.tag));
+
+      const result = {};
+
+      notes.forEach((item) => {
+        if (!result[item.tag]) {
+          result[item.tag] = [];
+        }
+        result[item.tag].push(item);
+      });
+
+      let noteBlocks = "";
+
+      for (const tag in result) {
+        if (result.hasOwnProperty(tag)) {
+          const tagGroup = result[tag];
+
+          let noteGroup = `
+          <div class="note-container">
+          <h1 >${tag}</h1>
+          <ul class="note-list">
+            ${tagGroup
+              .map(
+                (noteObj) => `
+              <li>
+              <h3>${noteObj.title}<br></h3>
+                <span>${noteObj.note}</span>
+              </li>
+            `
+              )
+              .join("")}
+          </ul>
+        </div>
+          `;
+
+          noteBlocks += noteGroup;
+        }
+      }
+
+      document.getElementById("note-storage").innerHTML = noteBlocks;
+    }
+  });
 });

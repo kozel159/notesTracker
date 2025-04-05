@@ -62,12 +62,6 @@ body {
   gap: 2rem;
 }
 
-@media (min-width: 800px) {
-  body {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
 /* Inbox */
 
 .note-inbox {
@@ -172,9 +166,14 @@ button:hover {
 }
 .note-container h1 {
   line-height: 1;
+  text-transform: capitalize;
 }
 
 .note-list {
   list-style: none;
-  display: none;
+  padding: 0;
+}
+.note-list li {
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--clr-neutral-200);
 }
