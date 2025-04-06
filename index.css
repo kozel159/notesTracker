@@ -1,11 +1,12 @@
 :root {
   --clr-primary-100: #f9f871;
+  --clr-primary-200: #76abae;
+  --clr-primary-300: #882000;
+
   --clr-neutral-100: #eeeeee;
   --clr-neutral-200: #31363f;
   --clr-neutral-300: #222831;
-
-  --clr-error: #882000;
-  --clr-succsess: #76abae;
+  --clr-neutral-400: #2b2f35;
 }
 
 *,
@@ -72,24 +73,57 @@ body {
   margin-inline: auto;
 }
 
-.form-box {
+.inbox-choice-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 0.5rem 0.5rem 0 0;
+  overflow: hidden;
+}
+.choice-btn {
+  width: 100%;
+  height: 50px;
+  background-color: var(--clr-neutral-400);
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  display: grid;
+  place-content: center;
+}
+.choice-notes.active {
+  background-color: var(--clr-primary-200);
+}
+.choice-todo.active {
+  background-color: var(--clr-primary-300);
+}
+
+.inbox-box {
   display: grid;
   gap: 1rem;
   background-color: var(--clr-neutral-300);
   padding: 2rem;
-  border-radius: 0.5rem;
+  border-radius: 0 0 0.5rem 0.5rem;
   width: 100%;
 }
 
-#note-form {
+.form-box h1 {
+  line-height: 1;
+  padding-bottom: 1rem;
+}
+
+.form-layout {
   display: grid;
-  gap: 1rem;
+  gap: 2rem;
   width: 100%;
   margin-inline: auto;
   width: 100%;
 }
 label {
   font-weight: bold;
+}
+.input-field-spacing {
+  display: grid;
+  gap: 1rem;
 }
 
 .form-field {
@@ -101,10 +135,10 @@ label {
   outline: 3px solid var(--clr-neutral-100);
 }
 .form-text:not(:placeholder-shown):valid {
-  outline-color: var(--clr-succsess);
+  outline-color: var(--clr-primary-200);
 }
-.form-text:not(:placeholder-shown):invalid {
-  outline-color: var(--clr-error);
+.todo-text.form-text:not(:placeholder-shown):valid {
+  outline-color: var(--clr-primary-300);
 }
 .form-text:focus {
   outline-color: var(--clr-primary-100);
@@ -126,18 +160,29 @@ form textarea {
   resize: none;
 }
 
-button {
+.form-btn {
   padding: 0.5rem;
+
   border-radius: 0.5rem;
-  border: 3px solid var(--clr-primary-100);
-  background-color: var(--clr-primary-100);
-  color: var(--clr-neutral-200);
+  color: var(--clr-neutral-100);
   cursor: pointer;
   transition: all 0.15s ease-in-out;
 }
-button:hover {
-  background-color: var(--clr-neutral-200);
-  color: var(--clr-primary-100);
+.note-btn {
+  border: 3px solid var(--clr-primary-200);
+  background-color: var(--clr-primary-200);
+}
+.todo-btn {
+  background-color: var(--clr-primary-300);
+  border: 3px solid var(--clr-primary-300);
+}
+.note-btn:hover {
+  background-color: var(--clr-neutral-300);
+  color: var(--clr-primary-200);
+}
+.todo-btn:hover {
+  background-color: var(--clr-neutral-300);
+  color: var(--clr-primary-300);
 }
 
 /* Storage */
@@ -161,6 +206,7 @@ button:hover {
   padding: 2rem;
   border-radius: 0.5rem;
   background-color: var(--clr-neutral-300);
+  overflow: hidden;
 }
 .note-container h1 {
   line-height: 1;

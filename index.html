@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="form-option.js"></script>
+    <script src="addTag.js"></script>
     <script src="index.js"></script>
     <script type="module" src="firebase.js"></script>
     <link rel="stylesheet" href="index.css" />
@@ -16,38 +18,69 @@
   </head>
   <body>
     <section class="note-inbox">
-      <div class="form-box">
-        <h1>Take a Note</h1>
-        <form id="note-form">
-          <label for="title">Title</label>
-          <input
-            class="form-field form-text"
-            type="text"
-            id="title"
-            placeholder="Title..."
-            required
-          />
-          <label for="note">Note</label>
-          <textarea
-            class="form-field form-text"
-            id="note"
-            placeholder="Note..."
-            required
-            rows="1"
-          ></textarea>
-          <label for="tags">Tags</label>
-          <div class="tag-box">
-            <select name="tags" class="form-field" id="tags-container" required>
-              <option value="none">None</option>
-              <option value="school">School</option>
-              <option value="programming">Programming</option>
-            </select>
-            <button type="button" id="new-tag-btn">New Tag</button>
-          </div>
-          <button type="submit" id="submit-btn">Submit</button>
-        </form>
+      <div class="inbox-choice-box">
+        <div id="choice-notes" class="choice-btn active choice-notes">
+          <h2>Notes</h2>
+        </div>
+        <div id="choice-todo" class="choice-btn choice-todo">
+          <h2>ToDos</h2>
+        </div>
+      </div>
+      <div class="inbox-box">
+        <div id="form-box" class="form-box">
+          <h1>Take a Note</h1>
+          <form class="form-layout" id="note-form">
+            <div class="input-field-spacing">
+              <label for="title">Title</label>
+              <input
+                class="form-field form-text"
+                type="text"
+                id="title"
+                placeholder="Title..."
+                required
+              />
+            </div>
+            <div class="input-field-spacing">
+              <label for="note">Note</label>
+              <textarea
+                class="form-field form-text"
+                id="note"
+                placeholder="Note..."
+                required
+                rows="1"
+              ></textarea>
+            </div>
+            <div class="input-field-spacing">
+              <label for="tags">Tags</label>
+              <div class="tag-box">
+                <select
+                  name="tags"
+                  class="form-field"
+                  id="tags-container"
+                  required
+                >
+                  <option value="Inbox">Inbox</option>
+                  <option value="school">School</option>
+                  <option value="programming">Programming</option>
+                </select>
+                <button
+                  type="button"
+                  class="note-btn form-btn"
+                  id="new-tag-btn"
+                >
+                  New Tag
+                </button>
+              </div>
+            </div>
+            <button type="submit" class="note-btn form-btn" id="submit-btn">
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
     </section>
+
+    <section id="todo-storage" class="todo-storage"></section>
 
     <section id="note-storage" class="note-storage"></section>
   </body>

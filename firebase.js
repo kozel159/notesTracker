@@ -13,7 +13,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-const referenceInDB = ref(database, "notes");
+const referenceInDBNotes = ref(database, "notes");
+const referenceInDBOptions = ref(database, "options");
 
 document.addEventListener("DOMContentLoaded", function () {
   document
@@ -27,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tag: document.getElementById("tags-container").value,
       };
 
-      push(referenceInDB, noteData)
+      push(referenceInDBNotes, noteData)
         .then(() => {
           console.log("Data saved successfully.");
           document.getElementById("note-form").reset();
@@ -37,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-  onValue(referenceInDB, (snapshot) => {
+  onValue(referenceInDBNotes, (snapshot) => {
     const snapshotDoesExist = snapshot.exists();
     if (snapshotDoesExist) {
       const snapshotValues = snapshot.val();
