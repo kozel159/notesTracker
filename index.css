@@ -1,7 +1,6 @@
 :root {
   --clr-primary-100: #f9f871;
   --clr-primary-200: #76abae;
-  --clr-primary-300: #882000;
 
   --clr-neutral-100: #eeeeee;
   --clr-neutral-200: #31363f;
@@ -90,11 +89,9 @@ body {
   display: grid;
   place-content: center;
 }
-.choice-notes.active {
-  background-color: var(--clr-primary-200);
-}
+.choice-notes.active,
 .choice-todo.active {
-  background-color: var(--clr-primary-300);
+  background-color: var(--clr-primary-200);
 }
 
 .inbox-box {
@@ -137,9 +134,6 @@ label {
 .form-text:not(:placeholder-shown):valid {
   outline-color: var(--clr-primary-200);
 }
-.todo-text.form-text:not(:placeholder-shown):valid {
-  outline-color: var(--clr-primary-300);
-}
 .form-text:focus {
   outline-color: var(--clr-primary-100);
 }
@@ -169,21 +163,15 @@ label {
   cursor: pointer;
   transition: all 0.15s ease-in-out;
 }
-.note-btn {
+.note-btn,
+.todo-btn {
   border: 3px solid var(--clr-primary-200);
   background-color: var(--clr-primary-200);
 }
-.todo-btn {
-  background-color: var(--clr-primary-300);
-  border: 3px solid var(--clr-primary-300);
-}
-.note-btn:hover {
-  background-color: var(--clr-neutral-300);
-  color: var(--clr-primary-200);
-}
+.note-btn:hover,
 .todo-btn:hover {
   background-color: var(--clr-neutral-300);
-  color: var(--clr-primary-300);
+  color: var(--clr-primary-200);
 }
 
 /*ToDo Storage */
@@ -236,8 +224,8 @@ label {
   display: none;
 }
 .custom-checkbox input:checked + .checkmark {
-  background-color: var(--clr-primary-300);
-  border: 2px solid var(--clr-primary-300);
+  background-color: var(--clr-primary-200);
+  border: 2px solid var(--clr-primary-200);
   transition: all 0.15s ease-in-out;
 }
 

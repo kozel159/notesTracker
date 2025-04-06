@@ -30,6 +30,22 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  //theme switch
+
+  let currentTheme = null;
+
+  function setTheme(theme) {
+    if (currentTheme === theme) return; // Do nothing if already active
+
+    const root = document.documentElement;
+
+    if (theme === "themeA") {
+      root.style.setProperty("--clr-primary-200", "#76abae");
+    } else if (theme === "themeB") {
+      root.style.setProperty("--clr-primary-200", "#882000");
+    }
+    currentTheme = theme;
+  }
   //form option
 
   const choiceNotes = document.getElementById("choice-notes");
@@ -49,7 +65,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (clickedBtn === choiceNotes) {
         formBox.innerHTML = `
-         <h1>Take a Note</h1>
+          <h1>Take a Note</h1>
           <form class="form-layout" id="note-form">
             <div class="input-field-spacing">
               <label for="title">Title</label>
@@ -98,6 +114,7 @@ window.addEventListener("DOMContentLoaded", () => {
             </button>
           </form>`;
         setupAutoResizing();
+        setTheme("themeA");
       } else if (clickedBtn === choiceTodo) {
         formBox.innerHTML = `
        <h1>Add To-Dos</h1>
@@ -105,7 +122,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="input-field-spacing">
               <label for="title">Title</label>
               <input
-                class="form-field form-text todo-text"
+                class="form-field form-text"
                 type="text"
                 id="title"
                 placeholder="Title..."
@@ -115,7 +132,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="input-field-spacing">
               <label for="task">Task</label>
               <textarea
-                class="form-field form-text todo-text textarea-b"
+                class="form-field form-text textarea-b"
                 id="task"
                 placeholder="Task..."
                 required
@@ -128,6 +145,7 @@ window.addEventListener("DOMContentLoaded", () => {
             </button>
           </form>`;
         setupAutoResizing();
+        setTheme("themeB");
       }
     }
   });
