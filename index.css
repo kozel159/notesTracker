@@ -194,7 +194,7 @@ label {
 
 .todo-storage-ul {
   list-style: none;
-  padding: 0;
+  padding: 1rem 0 0 0;
 
   display: grid;
   gap: 0.75rem;
