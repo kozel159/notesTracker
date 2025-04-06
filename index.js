@@ -2,17 +2,6 @@ const newTagBtn = document.getElementById("new-tag-btn");
 const tagsContainer = document.getElementById("tags-container");
 
 window.addEventListener("DOMContentLoaded", () => {
-  //textarea auto-resize
-
-  const textarea = document.getElementById("note");
-  textarea.addEventListener("input", () => autoResize(textarea));
-
-  document
-    .getElementById("note-form")
-    .addEventListener("submit", function (event) {
-      textarea.style.height = "auto";
-    });
-
   //note opener
 
   let openContainer = null;
@@ -45,8 +34,3 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-function autoResize(textarea) {
-  textarea.style.height = "auto";
-  textarea.style.height = textarea.scrollHeight + "px";
-}

@@ -1,4 +1,37 @@
 window.addEventListener("DOMContentLoaded", () => {
+  //textarea auto-resize
+
+  function setupAutoResizing() {
+    const textareas = document.querySelectorAll(".textarea-b");
+
+    textareas.forEach((textarea) => {
+      // Prevent duplicate listeners
+      textarea.removeEventListener("input", autoResizeWrapper);
+      textarea.addEventListener("input", autoResizeWrapper);
+    });
+  }
+
+  function autoResizeWrapper(event) {
+    autoResize(event.target);
+  }
+
+  function autoResize(textarea) {
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
+  }
+
+  setupAutoResizing();
+
+  document.addEventListener("submit", (event) => {
+    if (event.target.matches("#note-form, #todo-form")) {
+      document.querySelectorAll(".textarea-b").forEach((textarea) => {
+        textarea.style.height = "auto";
+      });
+    }
+  });
+
+  //form option
+
   const choiceNotes = document.getElementById("choice-notes");
   const choiceTodo = document.getElementById("choice-todo");
   const choiceBtn = document.querySelectorAll(".choice-btn");
@@ -31,7 +64,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="input-field-spacing">
               <label for="note">Note</label>
               <textarea
-                class="form-field form-text"
+                class="form-field form-text textarea-b"
                 id="note"
                 placeholder="Note..."
                 required
@@ -64,6 +97,7 @@ window.addEventListener("DOMContentLoaded", () => {
               Submit
             </button>
           </form>`;
+        setupAutoResizing();
       } else if (clickedBtn === choiceTodo) {
         formBox.innerHTML = `
        <h1>Add To-Dos</h1>
@@ -81,8 +115,8 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="input-field-spacing">
               <label for="task">Task</label>
               <textarea
-                class="form-field form-text todo-text"
-                id="note task"
+                class="form-field form-text todo-text textarea-b"
+                id="task"
                 placeholder="Task..."
                 required
                 rows="1"
@@ -93,6 +127,7 @@ window.addEventListener("DOMContentLoaded", () => {
               Submit
             </button>
           </form>`;
+        setupAutoResizing();
       }
     }
   });

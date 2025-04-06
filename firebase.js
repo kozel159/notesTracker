@@ -14,12 +14,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const referenceInDBNotes = ref(database, "notes");
-const referenceInDBOptions = ref(database, "options");
+const referenceInDBTodos = ref(database, "todos");
 
 document.addEventListener("DOMContentLoaded", function () {
-  document
-    .getElementById("note-form")
-    .addEventListener("submit", function (event) {
+  document.addEventListener("submit", function (event) {
+    if (event.target && event.target.id === "note-form") {
       event.preventDefault();
 
       const noteData = {
@@ -36,7 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch((error) => {
           console.error("Error saving data:", error);
         });
-    });
+    }
+  });
 
   onValue(referenceInDBNotes, (snapshot) => {
     const snapshotDoesExist = snapshot.exists();
@@ -83,8 +83,45 @@ document.addEventListener("DOMContentLoaded", function () {
           noteBlocks += noteGroup;
         }
       }
-
       document.getElementById("note-storage").innerHTML = noteBlocks;
+    }
+  });
+
+  document.addEventListener("submit", function (event) {
+    if (event.target && event.target.id === "todo-form") {
+      event.preventDefault();
+
+      const todoData = {
+        title: document.getElementById("title").value,
+        task: document.getElementById("task").value,
+      };
+
+      push(referenceInDBTodos, todoData)
+        .then(() => {
+          console.log("Data saved successfully.");
+          event.target.reset();
+        })
+        .catch((error) => {
+          console.error("Error saving data:", error);
+        });
+    }
+  });
+
+  onValue(referenceInDBTodos, (snapshot) => {
+    const snapshotDoesExist = snapshot.exists();
+    if (snapshotDoesExist) {
+      const snapshotValues = snapshot.val();
+      const todos = Object.values(snapshotValues);
+
+      let todoGroup = "";
+
+      todos.forEach((item) => {
+        todoGroup += `
+          
+          <li><label class="custom-checkbox"><input type="checkbox"><span class="checkmark"></span></label>${item.title}</li>`;
+      });
+
+      document.getElementById("todo-storage-ul").innerHTML = todoGroup;
     }
   });
 });
