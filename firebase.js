@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         result[item.tag].push(item);
       });
+      console.log(result);
 
       let noteBlocks = "";
 

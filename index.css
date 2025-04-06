@@ -56,7 +56,7 @@ body {
   width: 100%;
   max-width: 1500px;
   margin-inline: auto;
-  height: 100vh;
+  height: 100%;
   padding: 1rem;
 
   display: grid;
@@ -144,7 +144,7 @@ button:hover {
 
 .note-storage {
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: 1500px;
   align-self: center;
 
@@ -161,9 +161,6 @@ button:hover {
   padding: 2rem;
   border-radius: 0.5rem;
   background-color: var(--clr-neutral-300);
-
-  display: grid;
-  gap: 1rem;
 }
 .note-container h1 {
   line-height: 1;
@@ -171,8 +168,10 @@ button:hover {
 }
 
 .note-list {
+  display: none;
+
   list-style: none;
-  padding: 0;
+  padding: 1rem 0 0 0;
 }
 .note-list li {
   padding-bottom: 0.5rem;
