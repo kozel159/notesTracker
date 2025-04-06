@@ -16,39 +16,49 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (clickedBtn === choiceNotes) {
         formBox.innerHTML = `
-        <h1>Take a Note</h1>
+         <h1>Take a Note</h1>
           <form class="form-layout" id="note-form">
-            <label for="title">Title</label>
-            <input
-              class="form-field form-text"
-              type="text"
-              id="title"
-              placeholder="Title..."
-              required
-            />
-            <label for="note">Note</label>
-            <textarea
-              class="form-field form-text"
-              id="note"
-              placeholder="Note..."
-              required
-              rows="1"
-            ></textarea>
-            <label for="tags">Tags</label>
-            <div class="tag-box">
-              <select
-                name="tags"
-                class="form-field"
-                id="tags-container"
+            <div class="input-field-spacing">
+              <label for="title">Title</label>
+              <input
+                class="form-field form-text"
+                type="text"
+                id="title"
+                placeholder="Title..."
                 required
-              >
-                <option value="Inbox">Inbox</option>
-                <option value="school">School</option>
-                <option value="programming">Programming</option>
-              </select>
-              <button type="button" class="note-btn form-btn" id="new-tag-btn">
-                New Tag
-              </button>
+              />
+            </div>
+            <div class="input-field-spacing">
+              <label for="note">Note</label>
+              <textarea
+                class="form-field form-text"
+                id="note"
+                placeholder="Note..."
+                required
+                rows="1"
+              ></textarea>
+            </div>
+            <div class="input-field-spacing">
+              <label for="tags">Tags</label>
+              <div class="tag-box">
+                <select
+                  name="tags"
+                  class="form-field"
+                  id="tags-container"
+                  required
+                >
+                  <option value="Inbox">Inbox</option>
+                  <option value="school">School</option>
+                  <option value="programming">Programming</option>
+                </select>
+                <button
+                  type="button"
+                  class="note-btn form-btn"
+                  id="new-tag-btn"
+                >
+                  New Tag
+                </button>
+              </div>
             </div>
             <button type="submit" class="note-btn form-btn" id="submit-btn">
               Submit
