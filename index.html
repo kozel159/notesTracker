@@ -7,6 +7,7 @@
     <script src="addTag.js"></script>
     <script src="index.js"></script>
     <script type="module" src="firebase.js"></script>
+    <script type="module" src="firebase-login.js"></script>
     <link rel="stylesheet" href="index.css" />
     <title>NoteTracker</title>
 
@@ -17,6 +18,12 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
+    <div class="login-popup">
+      <h1>Login</h1>
+      <input type="email" id="email" placeholder="Enter your email" />
+      <button id="sendLink">Send Login Link</button>
+    </div>
+
     <section class="note-inbox">
       <div id="inbox-choice-box" class="inbox-choice-box">
         <div id="choice-notes" class="choice-btn active choice-notes">

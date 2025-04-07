@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const snapshotValues = snapshot.val();
       const notes = Object.values(snapshotValues);
 
+      console.log(notes);
       notes.sort((a, b) => a.tag.localeCompare(b.tag));
 
       const result = {};
