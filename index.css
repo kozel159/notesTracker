@@ -62,9 +62,12 @@ body {
   margin-inline: auto;
   height: 100%;
   padding: 1rem;
+}
 
+main {
   display: grid;
   gap: 2rem;
+  display: none;
 }
 
 /* Inbox */

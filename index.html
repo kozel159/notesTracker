@@ -18,82 +18,90 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <div class="login-popup">
-      <h1>Login</h1>
-      <input type="email" id="email" placeholder="Enter your email" />
-      <button id="sendLink">Send Login Link</button>
+    <div id="login-section">
+      <h2>Login</h2>
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter your email"
+        value="jakub.hricenko@gmail.com"
+      />
+      <button id="sendLink">Send login link</button>
+      <p id="login-message"></p>
     </div>
-
-    <section class="note-inbox">
-      <div id="inbox-choice-box" class="inbox-choice-box">
-        <div id="choice-notes" class="choice-btn active choice-notes">
-          <h2>Notes</h2>
+    <main id="app-section">
+      <button id="test-write">Test DB Write</button>
+      <section class="note-inbox">
+        <div id="inbox-choice-box" class="inbox-choice-box">
+          <div id="choice-notes" class="choice-btn active choice-notes">
+            <h2>Notes</h2>
+          </div>
+          <div id="choice-todo" class="choice-btn choice-todo">
+            <h2>ToDos</h2>
+          </div>
         </div>
-        <div id="choice-todo" class="choice-btn choice-todo">
-          <h2>ToDos</h2>
-        </div>
-      </div>
-      <div class="inbox-box">
-        <div id="form-box" class="form-box">
-          <h1>Take a Note</h1>
-          <form class="form-layout" id="note-form">
-            <div class="input-field-spacing">
-              <label for="title">Title</label>
-              <input
-                class="form-field form-text"
-                type="text"
-                id="title"
-                placeholder="Title..."
-                required
-              />
-            </div>
-            <div class="input-field-spacing">
-              <label for="note">Note</label>
-              <textarea
-                class="form-field form-text textarea-b"
-                id="note"
-                placeholder="Note..."
-                required
-                rows="1"
-              ></textarea>
-            </div>
-            <div class="input-field-spacing">
-              <label for="tags">Tags</label>
-              <div class="tag-box">
-                <select
-                  name="tags"
-                  class="form-field"
-                  id="tags-container"
+        <div class="inbox-box">
+          <div id="form-box" class="form-box">
+            <h1>Take a Note</h1>
+            <form class="form-layout" id="note-form">
+              <div class="input-field-spacing">
+                <label for="title">Title</label>
+                <input
+                  class="form-field form-text"
+                  type="text"
+                  id="title"
+                  placeholder="Title..."
                   required
-                >
-                  <option value="Inbox">Inbox</option>
-                  <option value="school">School</option>
-                  <option value="programming">Programming</option>
-                </select>
-                <button
-                  type="button"
-                  class="note-btn form-btn"
-                  id="new-tag-btn"
-                >
-                  New Tag
-                </button>
+                />
               </div>
-            </div>
-            <button type="submit" class="note-btn form-btn" id="submit-btn">
-              Submit
-            </button>
-          </form>
+              <div class="input-field-spacing">
+                <label for="note">Note</label>
+                <textarea
+                  class="form-field form-text textarea-b"
+                  id="note"
+                  placeholder="Note..."
+                  required
+                  rows="1"
+                ></textarea>
+              </div>
+              <div class="input-field-spacing">
+                <label for="tags">Tags</label>
+                <div class="tag-box">
+                  <select
+                    name="tags"
+                    class="form-field"
+                    id="tags-container"
+                    required
+                  >
+                    <option value="Inbox">Inbox</option>
+                    <option value="school">School</option>
+                    <option value="programming">Programming</option>
+                  </select>
+                  <button
+                    type="button"
+                    class="note-btn form-btn"
+                    id="new-tag-btn"
+                  >
+                    New Tag
+                  </button>
+                </div>
+              </div>
+              <button type="submit" class="note-btn form-btn" id="submit-btn">
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="todo-storage" class="todo-storage">
-      <div class="todo-storage-box">
-        <h1>To-Do:</h1>
-        <ul id="todo-storage-ul" class="todo-storage-ul"></ul>
-      </div>
-    </section>
+      <section id="todo-storage" class="todo-storage">
+        <div class="todo-storage-box">
+          <h1>To-Do:</h1>
+          <ul id="todo-storage-ul" class="todo-storage-ul"></ul>
+        </div>
+      </section>
 
-    <section id="note-storage" class="note-storage"></section>
+      <section id="note-storage" class="note-storage"></section>
+    </main>
   </body>
 </html>

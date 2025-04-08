@@ -6,7 +6,13 @@ import {
   signInWithEmailLink,
   onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import {
+  getDatabase,
+  ref,
+  set,
+} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
+// 🔧 Your Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyALzwHUENOFTd_SBpMHzDGHVaBJng2uefg",
   authDomain: "notetracker-2e7d0.firebaseapp.com",
@@ -19,50 +25,73 @@ const firebaseConfig = {
   measurementId: "G-QH4QB85JZR",
 };
 
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
+
 const auth = getAuth();
+const db = getDatabase();
 
-const actionCodeSettings = {
-  url: "https://note-tracker-kozel.netlify.app", // Make sure this matches what you added to Firebase Auth settings
-  handleCodeInApp: true,
-};
-document.addEventListener("DOMContentLoaded", function () {
-  // Send the link
-  document.getElementById("sendLink").addEventListener("click", () => {
-    const email = document.getElementById("email").value;
-    sendSignInLinkToEmail(auth, email, actionCodeSettings).then(() => {
-      window.localStorage.setItem("emailForSignIn", email);
-      alert("Check your inbox for the login link!");
-    });
-  });
-
-  // Handle the login if link clicked
-  if (isSignInWithEmailLink(auth, window.location.href)) {
-    console.log("📩 Login link detected");
-
-    let email = window.localStorage.getItem("emailForSignIn");
-    if (!email) {
-      email = prompt("Please enter your email:");
-    }
-
-    signInWithEmailLink(auth, email, window.location.href)
-      .then((result) => {
-        console.log("✅ Signed in as:", result.user.email);
-        window.localStorage.removeItem("emailForSignIn");
-      })
-      .catch((error) => {
-        console.error("❌ Error during sign-in", error);
-      });
+// 🔐 Handle magic login link
+if (isSignInWithEmailLink(auth, window.location.href)) {
+  let email = window.localStorage.getItem("emailForSignIn");
+  if (!email) {
+    email = prompt("Please confirm your email for login");
   }
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      console.log("✅ Logged in as:", user.email);
-      document.getElementById("login-section").style.display = "none";
-      document.getElementById("app-section").style.display = "block";
-    } else {
-      console.log("❌ Not logged in");
-      document.getElementById("login-section").style.display = "block";
-      document.getElementById("app-section").style.display = "none";
-    }
-  });
+  signInWithEmailLink(auth, email, window.location.href)
+    .then((result) => {
+      window.localStorage.removeItem("emailForSignIn");
+      console.log("✅ Signed in as:", result.user.email);
+    })
+    .catch((error) => {
+      console.error("❌ Sign-in error:", error);
+    });
+}
+
+// 👤 Auth state listener
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("login-section").style.display = "none";
+    document.getElementById("app-section").style.display = "block";
+    document.getElementById(
+      "user-email"
+    ).textContent = `Logged in as: ${user.email}`;
+  } else {
+    document.getElementById("login-section").style.display = "block";
+    document.getElementById("app-section").style.display = "none";
+  }
+});
+
+// 📩 Send sign-in link
+document.getElementById("sendLink").addEventListener("click", () => {
+  const email = document.getElementById("email").value;
+  const actionCodeSettings = {
+    url: "https://note-tracker-kozel.netlify.app",
+    handleCodeInApp: true,
+  };
+
+  sendSignInLinkToEmail(auth, email, actionCodeSettings)
+    .then(() => {
+      window.localStorage.setItem("emailForSignIn", email);
+      document.getElementById("login-message").textContent =
+        "✅ Login link sent! Check your email.";
+    })
+    .catch((error) => {
+      console.error("❌ Error sending login link:", error);
+      document.getElementById("login-message").textContent =
+        "❌ Failed to send link.";
+    });
+});
+
+// 🧪 Test Realtime DB write
+document.getElementById("test-write").addEventListener("click", () => {
+  const testRef = ref(db, "test/" + Date.now());
+  set(testRef, {
+    message: "Hello from secure app!",
+    user: auth.currentUser?.email || "unknown",
+  })
+    .then(() => {
+      alert("✅ Write succeeded!");
+    })
+    .catch((error) => {
+      alert("❌ Write failed: " + error.message);
+    });
 });
