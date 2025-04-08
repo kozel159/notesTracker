@@ -31,7 +31,7 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log("✅ Logged in as:", user.email);
     document.getElementById("login-section").style.display = "none";
-    document.getElementById("app-section").style.display = "block";
+    document.getElementById("app-section").style.display = "grid";
   } else {
     console.log("🔓 Not logged in");
     document.getElementById("login-section").style.display = "block";
