@@ -1,22 +1,40 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import {
   getDatabase,
   ref,
   push,
+  set,
   onValue,
   remove,
-} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+import {
+  getAuth,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
 const firebaseConfig = {
+  apiKey: "AIzaSyALzwHUENOFTd_SBpMHzDGHVaBJng2uefg",
+  authDomain: "notetracker-2e7d0.firebaseapp.com",
   databaseURL:
-    "https://notetracker-2e7d0-default-rtdb.europe-west1.firebasedatabase.app/",
+    "https://notetracker-2e7d0-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "notetracker-2e7d0",
+  storageBucket: "notetracker-2e7d0.firebasestorage.app",
+  messagingSenderId: "558504822246",
+  appId: "1:558504822246:web:feffcfd81b24fc6ee4c227",
 };
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const database = getDatabase(app);
 const referenceInDBNotes = ref(database, "notes");
 const referenceInDBTodos = ref(database, "todos");
 
-document.addEventListener("DOMContentLoaded", function () {
+onAuthStateChanged(auth, (user) => {
+  if (!user) return;
+
+  console.log("✅ Firebase DB ready for:", user.email);
+
   document.addEventListener("submit", function (event) {
     if (event.target && event.target.id === "note-form") {
       event.preventDefault();
