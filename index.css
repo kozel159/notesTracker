@@ -67,7 +67,6 @@ body {
 main {
   display: grid;
   gap: 2rem;
-  display: none;
 }
 
 /* Inbox */
