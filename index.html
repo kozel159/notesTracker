@@ -18,16 +18,17 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <div id="login-section">
+    <div id="login-section" style="display: none;">
       <h2>Login</h2>
-      <input
-        type="email"
-        id="email"
-        placeholder="Enter your email"
-        value="jakub.hricenko@gmail.com"
-      />
-      <button id="sendLink">Send login link</button>
-      <p id="login-message"></p>
+      <input type="email" id="login-email" placeholder="Email" value="jakub.hricenko@gmail.com" />
+      <input type="password" id="login-password" placeholder="Password" />
+      <button id="login-btn">Login</button>
+    </div>
+    
+    <div id="app-section" style="display: none;">
+      <h2>Welcome to Note Tracker</h2>
+      <button id="logout-btn">Logout</button>
+    </div>
     </div>
     <main id="app-section">
       <button id="test-write">Test DB Write</button>

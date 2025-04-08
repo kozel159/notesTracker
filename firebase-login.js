@@ -1,18 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import {
   getAuth,
-  sendSignInLinkToEmail,
-  isSignInWithEmailLink,
-  signInWithEmailLink,
+  signInWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import {
-  getDatabase,
-  ref,
-  set,
-} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-// 🔧 Your Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyALzwHUENOFTd_SBpMHzDGHVaBJng2uefg",
   authDomain: "notetracker-2e7d0.firebaseapp.com",
@@ -28,70 +21,38 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 const auth = getAuth();
-const db = getDatabase();
 
-// 🔐 Handle magic login link
-if (isSignInWithEmailLink(auth, window.location.href)) {
-  let email = window.localStorage.getItem("emailForSignIn");
-  if (!email) {
-    email = prompt("Please confirm your email for login");
-  }
-  signInWithEmailLink(auth, email, window.location.href)
-    .then((result) => {
-      window.localStorage.removeItem("emailForSignIn");
-      console.log("✅ Signed in as:", result.user.email);
-    })
-    .catch((error) => {
-      console.error("❌ Sign-in error:", error);
-    });
-}
-
-// 👤 Auth state listener
+// 🔐 Try auto-login
 onAuthStateChanged(auth, (user) => {
   if (user) {
+    console.log("✅ Logged in as:", user.email);
     document.getElementById("login-section").style.display = "none";
     document.getElementById("app-section").style.display = "block";
-    document.getElementById(
-      "user-email"
-    ).textContent = `Logged in as: ${user.email}`;
   } else {
+    console.log("🔓 Not logged in");
     document.getElementById("login-section").style.display = "block";
     document.getElementById("app-section").style.display = "none";
   }
 });
 
-// 📩 Send sign-in link
-document.getElementById("sendLink").addEventListener("click", () => {
-  const email = document.getElementById("email").value;
-  const actionCodeSettings = {
-    url: "https://note-tracker-kozel.netlify.app",
-    handleCodeInApp: true,
-  };
+// 🔐 Manual login button
+document.getElementById("login-btn").addEventListener("click", () => {
+  const email = document.getElementById("login-email").value;
+  const password = document.getElementById("login-password").value;
 
-  sendSignInLinkToEmail(auth, email, actionCodeSettings)
-    .then(() => {
-      window.localStorage.setItem("emailForSignIn", email);
-      document.getElementById("login-message").textContent =
-        "✅ Login link sent! Check your email.";
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      console.log("✅ Logged in:", userCredential.user.email);
     })
     .catch((error) => {
-      console.error("❌ Error sending login link:", error);
-      document.getElementById("login-message").textContent =
-        "❌ Failed to send link.";
+      console.error("❌ Login error:", error.message);
+      alert("Login failed: " + error.message);
     });
 });
 
-// 🧪 Test Realtime DB write
-document.getElementById("test-write").addEventListener("click", () => {
-  const testRef = ref(db, "test/" + Date.now());
-  set(testRef, {
-    message: "Hello from secure app!",
-    user: auth.currentUser?.email || "unknown",
-  })
-    .then(() => {
-      alert("✅ Write succeeded!");
-    })
-    .catch((error) => {
-      alert("❌ Write failed: " + error.message);
-    });
+// 🚪 Optional logout button
+document.getElementById("logout-btn")?.addEventListener("click", () => {
+  signOut(auth).then(() => {
+    console.log("🔒 Logged out");
+  });
 });
