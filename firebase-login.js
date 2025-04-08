@@ -1,4 +1,7 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import {
+  initializeApp,
+  getApps,
+} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -18,6 +21,8 @@ const firebaseConfig = {
   measurementId: "G-QH4QB85JZR",
 };
 
+const app =
+  getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 initializeApp(firebaseConfig);
 
 const auth = getAuth();
